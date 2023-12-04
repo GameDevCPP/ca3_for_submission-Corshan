@@ -78,3 +78,4 @@ target_link_libraries(UntitledGame PRIVATE sfml-graphics lib_engine sfml-system)
 target_compile_features(UntitledGame PRIVATE cxx_std_17)
 
 
+install(TARGETS UntitledGame)
