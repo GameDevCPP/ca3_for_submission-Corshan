@@ -28,6 +28,9 @@ add_subdirectory("lib/b2d/Box2D")
 set(B2D_INCS "lib/b2d/Box2D/")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
+add_subdirectory("lib/json")
+set(JSON_INCS "lib/json/single_include/nlohmann")
+
 #### Add Engine and our own library projects####
 
 file(GLOB_RECURSE RESOURCE_FILES "res/*.*")
@@ -40,7 +43,7 @@ target_link_libraries(lib_engine lib_tile_level_loader lib_maths lib_ecm Box2D s
 ## Tile loader lib
 file(GLOB_RECURSE SOURCE_FILES lib/lib_tile_level_loader/*.cpp lib/lib_tile_level_loader/*.h)
 add_library(lib_tile_level_loader STATIC ${SOURCE_FILES})
-target_include_directories(lib_tile_level_loader INTERFACE "${CMAKE_SOURCE_DIR}/lib/lib_tile_level_loader/" )
+target_include_directories(lib_tile_level_loader INTERFACE "${CMAKE_SOURCE_DIR}/lib/lib_tile_level_loader/" PUBLIC SYSTEM ${JSON_INCS})
 target_link_libraries(lib_tile_level_loader lib_maths sfml-graphics)
 
 # Maths lib

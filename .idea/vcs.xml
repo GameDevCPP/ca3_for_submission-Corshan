@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/b2d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/json" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/sfml" vcs="Git" />
   </component>
 </project>

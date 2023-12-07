@@ -19,11 +19,7 @@ public:
 
 	typedef unsigned char Tile;
 
-	static sf::Texture floorTexture;
-	static sf::IntRect floorTextureRect;
-
-	static sf::Texture wallTexture;
-	static sf::IntRect wallTextureRect;
+	static sf::Texture tilesTexture;
 
 	enum TILES {
 		EMPTY = ' ',
@@ -63,9 +59,11 @@ public:
 
 protected:
 	static std::unique_ptr<Tile[]> _tiles;
+    static std::vector<int> _map;
 	static size_t _width;
 	static size_t _height;
 	static sf::Vector2f _offset;
+    static int _columns;
 
 	static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
 
