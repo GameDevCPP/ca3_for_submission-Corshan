@@ -7,7 +7,7 @@ using namespace sf;
 
 
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, Color::White}, {END, Color::Red}, {FLOOR, Color::Magenta}, {START, Color::Green } };
+	{WALL, Color::White}, {END, Color::Red}, {START, Color::Green } };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
 	auto it = _colours.find(t);
@@ -39,61 +39,35 @@ void LevelSystem::setTextureMap(string path) {
 }
 
 void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
-	_tileSize = 70;
-	size_t w = 0, h = 0;
-	string buffer;
-
-//	// Load in file to buffer
-//	ifstream f(path);
-//	if (f.good()) {
-//		f.seekg(0, std::ios::end);
-//		buffer.resize(f.tellg());
-//		f.seekg(0);
-//		f.read(&buffer[0], buffer.size());
-//		f.close();
-//	}
-//	else {
-//		throw string("Couldn't open level file: ") + path;
-//	}
-//
-//	std::vector<Tile> temp_tiles;
-//	int widthCheck = 0;
-//	for (int i = 0; i < buffer.size(); ++i) {
-//		const char c = buffer[i];
-//		if (c == '\0') { break; }
-//		if (c == '\n') { // newline
-//			if (w == 0) {  // if we haven't written width yet
-//				w = i;       // set width
-//			}
-//			else if (w != (widthCheck - 1)) {
-//				throw string("non uniform width:" + to_string(h) + " ") + path;
-//			}
-//			widthCheck = 0;
-//			h++; // increment height
-//		}
-//		else {
-//			temp_tiles.push_back((Tile)c);
-//		}
-//		++widthCheck;
-//	}
-//
-//	if (temp_tiles.size() != (w * h)) {
-//		throw string("Can't parse level file") + path;
-//	}
-    std::ifstream json("res/levels/levelOne.json");
+    std::ifstream json(path);
     nlohmann::json file = nlohmann::json::parse(json);
 
     _map = file.at("layers")[0].at("data").get<vector<int>>();
 
+    std::vector<Tile> temp_tiles;
+    for(int tile: _map){
+        switch (tile) {
+            case 0:
+                temp_tiles.push_back(EMPTY);
+            break;
+            default:
+                temp_tiles.push_back(WALL);
+            break;
+        }
+    }
 
 	_width = file.at("layers")[0].at("width"); // set static class vars
 	_height = file.at("layers")[0].at("height");
+
     _columns = file.at("tilesets")[0].at("columns");
+    _tileSize = file.at("tileheight");
+
     _tiles = std::make_unique<Tile[]>(_width * _height);
-//    _columns--;
-//	std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
+    std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
+
 	cout << "Level " << path << " Loaded. " << _width << "x" << _height << std::endl;
-//    json.close();
+
+    json.close();
 	buildSprites();
 }
 

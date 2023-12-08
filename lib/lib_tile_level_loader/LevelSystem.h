@@ -17,18 +17,15 @@ public:
 
 	static void renderFloor(sf::RenderWindow& window);
 
-	typedef unsigned char Tile;
+	typedef int Tile;
 
 	static sf::Texture tilesTexture;
 
 	enum TILES {
-		EMPTY = ' ',
-		START = 's',
-		END = 'e',
-		WALL = 'w',
-		ENEMY = 'n',
-		WAYPOINT = '+',
-		FLOOR = 'f'
+		EMPTY = 0,
+		START = 1,
+		END = 2,
+		WALL = 1,
 	};
 
 	static Tile getTile(sf::Vector2ul);
