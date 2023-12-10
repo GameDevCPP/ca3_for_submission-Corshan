@@ -1,0 +1,11 @@
+{
+  "player": {
+    "run": [
+      {"x":0,"y":0, "width":74, "height": 94},
+      {"x":74,"y":0, "width":74, "height": 94}
+    ],
+    "idle": [
+      {"x":0,"y":0, "width":74, "height": 94}
+    ]
+  }
+}
