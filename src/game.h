@@ -5,6 +5,3 @@
 
 extern MainMenu menu;
 extern LevelOne levelOne;
-
-extern int GAME_WIDTH;
-extern int GAME_HEIGHT;

@@ -17,7 +17,7 @@ protected:
     std::vector<sf::Rect<int>> _rects;
     unsigned int _index;
     Anim _currentAnim;
-    float _delay = 1.f;
+    float _delay = 0.1f;
 public:
     void update(double dt) override;
     void render() override {};

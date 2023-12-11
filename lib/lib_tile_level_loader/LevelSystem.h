@@ -11,7 +11,7 @@
 
 class LevelSystem {
 public:
-	static void loadLevelFile(const std::string&, float tileSize = 100.0f);
+	static void loadLevelFile(const std::string&,const std::string&, float tileSize = 100.0f);
 	static void unload();
 	static void render(sf::RenderWindow& window);
 
@@ -25,7 +25,7 @@ public:
 		EMPTY = 0,
 		START = 1,
 		END = 2,
-		WALL = 1,
+		WALL = 3,
 	};
 
 	static Tile getTile(sf::Vector2ul);
@@ -56,6 +56,7 @@ public:
 
 protected:
 	static std::unique_ptr<Tile[]> _tiles;
+    static std::vector<int> _tileCollisions;
     static std::vector<int> _map;
 	static size_t _width;
 	static size_t _height;
@@ -73,4 +74,6 @@ private:
 	LevelSystem() = delete;
 
 	~LevelSystem() = delete;
+
+    static bool isWall(int tile);
 };

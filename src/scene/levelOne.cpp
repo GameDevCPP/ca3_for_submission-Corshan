@@ -8,9 +8,22 @@
 std::shared_ptr<Entity> player;
 
 void LevelOne::Load() {
+    LevelSystem::loadLevelFile("res/levels/LevelOne/levelOne_V3.json","res/img/tile_colision.json");
+//    Engine::GetWindow().setSize({
+//        static_cast<unsigned int>(ls::getWidth()*ls::getTileSize()),
+//             static_cast<unsigned int>(ls::getHeight()*ls::getTileSize())
+//    });
+//    Engine::GetWindow().setView(sf::View(
+//            {0,0,
+//             static_cast<float>(Engine::getWindowSize().x),
+//             static_cast<float>(Engine::getWindowSize().y)}));
+
+Engine::resizeWindow({
+    static_cast<unsigned int>(ls::getWidth()*ls::getTileSize()),
+    static_cast<unsigned int>(ls::getHeight()*ls::getTileSize())
+});
     auto txt = makeEntity();
     txt->addComponent<TextComponent>("LevelOne");
-    LevelSystem::loadLevelFile("res/levels/levelOne.json", 10);
 
     {
         player = makeEntity();

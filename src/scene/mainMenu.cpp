@@ -7,7 +7,7 @@
 void MainMenu::Load() {
     {
         _playButton = makeEntity();
-        _playButton->addComponent<ButtonComponent>(sf::Vector2f {GAME_WIDTH/2.F,GAME_HEIGHT/2.F}, "Play");
+        _playButton->addComponent<ButtonComponent>(sf::Vector2f {Engine::getWindowSize().x/2.F,Engine::getWindowSize().y/2.F}, "Play");
     }
     setLoaded(true);
 }

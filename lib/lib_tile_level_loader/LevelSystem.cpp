@@ -25,6 +25,7 @@ std::unique_ptr<LevelSystem::Tile[]> LevelSystem::_tiles;
 size_t LevelSystem::_width;
 size_t LevelSystem::_height;
 std::vector<int> LevelSystem::_map;
+std::vector<int> LevelSystem::_tileCollisions;
 int LevelSystem::_columns;
 
 float LevelSystem::_tileSize(100.f);
@@ -38,21 +39,23 @@ void LevelSystem::setTextureMap(string path) {
 	tilesTexture.loadFromFile(path);
 }
 
-void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
+void LevelSystem::loadLevelFile(const std::string& path, const std::string& tileColision, float tileSize) {
     std::ifstream json(path);
     nlohmann::json file = nlohmann::json::parse(json);
 
+    std::ifstream col(tileColision);
+    nlohmann::json colFile = nlohmann::json::parse(col);
+
     _map = file.at("layers")[0].at("data").get<vector<int>>();
+    _tileCollisions = colFile.at("tiles").get<vector<int>>();
 
     std::vector<Tile> temp_tiles;
     for(int tile: _map){
-        switch (tile) {
-            case 0:
-                temp_tiles.push_back(EMPTY);
-            break;
-            default:
-                temp_tiles.push_back(WALL);
-            break;
+        if (isWall(tile)){
+            temp_tiles.push_back(WALL);
+        }
+        else{
+            temp_tiles.push_back(EMPTY);
         }
     }
 
@@ -69,6 +72,13 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 
     json.close();
 	buildSprites();
+}
+
+bool LevelSystem::isWall(int tile) {
+    for (auto c: _tileCollisions) {
+        if (c == tile) return true;
+    }
+    return false;
 }
 
 void LevelSystem::buildSprites(bool optimise) {
@@ -93,7 +103,7 @@ void LevelSystem::buildSprites(bool optimise) {
 
         sprite->setTexture(&tilesTexture);
         sprite->setTextureRect(r);
-        sprite->setSize({70,70});
+        sprite->setSize({_tileSize,_tileSize});
 
         auto pos = getTilePosition(Vector2ul {i%_width,i/_width});
         sprite->setPosition(pos);

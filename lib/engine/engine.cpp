@@ -155,6 +155,16 @@ void Engine::changeResolution(int x, int y)
 	_window->create(VideoMode(_newResolution.x, _newResolution.y), "Drop Pod");
 }
 
+void Engine::resizeWindow(sf::Vector2u size) {
+    _window->setSize(size);
+    _window->setView(sf::View({0,0, static_cast<float>(size.x), static_cast<float>(size.y)}));
+    auto screen = sf::VideoMode::getDesktopMode();
+    _window->setPosition({
+        static_cast<int>(screen.width/2 - _window->getSize().x/2),
+        static_cast<int>(screen.height/2 - _window->getSize().y/2)
+    });
+}
+
 void Engine::ChangeScene(Scene* s) {
 	cout << "Eng: changing scene: " << s << endl;
 	auto old = _activeScene;
