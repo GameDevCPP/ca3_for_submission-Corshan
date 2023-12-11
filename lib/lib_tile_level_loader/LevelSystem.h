@@ -17,14 +17,17 @@ public:
 
 	static void renderFloor(sf::RenderWindow& window);
 
+    static void setBackground(const std::string& path, sf::Vector2f size);
+
 	typedef int Tile;
 
 	static sf::Texture tilesTexture;
 
+
 	enum TILES {
 		EMPTY = 0,
-		START = 1,
-		END = 2,
+		START = 160,
+		END = 58,
 		WALL = 3,
 	};
 
@@ -62,6 +65,8 @@ protected:
 	static size_t _height;
 	static sf::Vector2f _offset;
     static int _columns;
+    static sf::Texture _backgroundTexture;
+    static std::unique_ptr<sf::Sprite> _background;
 
 	static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
 

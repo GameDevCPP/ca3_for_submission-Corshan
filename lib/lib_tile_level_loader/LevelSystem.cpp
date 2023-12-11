@@ -34,6 +34,8 @@ Vector2f LevelSystem::_offset(0.0f, 0.0f);
 vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
 
 sf::Texture LevelSystem::tilesTexture;
+sf::Texture LevelSystem::_backgroundTexture;
+std::unique_ptr<sf::Sprite> LevelSystem::_background;
 
 void LevelSystem::setTextureMap(string path) {
 	tilesTexture.loadFromFile(path);
@@ -53,6 +55,10 @@ void LevelSystem::loadLevelFile(const std::string& path, const std::string& tile
     for(int tile: _map){
         if (isWall(tile)){
             temp_tiles.push_back(WALL);
+        } else if(tile == START){
+            temp_tiles.push_back(START);
+        }else if(tile == END){
+            temp_tiles.push_back(END);
         }
         else{
             temp_tiles.push_back(EMPTY);
@@ -113,9 +119,20 @@ void LevelSystem::buildSprites(bool optimise) {
 }
 
 void LevelSystem::render(RenderWindow& window) {
+    window.draw(*_background);
 	for (auto& t : _sprites) {
 		window.draw(*t);
 	}
+}
+
+void LevelSystem::setBackground(const std::string &path, sf::Vector2f size) {
+    _backgroundTexture.loadFromFile(path);
+
+    auto s = std::make_unique<sf::Sprite>();
+    s->setTexture(_backgroundTexture);
+    s->setPosition({50,0});
+
+    _background = std::move(s);
 }
 
 void LevelSystem::renderFloor(RenderWindow& window) {
