@@ -13,11 +13,16 @@ enum Anim {
 };
 
 class AnimationComponent: public Component {
+private:
+    void loop(double dt);
+    void play(double dt);
 protected:
     std::vector<sf::Rect<int>> _rects;
     unsigned int _index;
     Anim _currentAnim;
     float _delay = 0.1f;
+    bool _isLoop = false;
+    bool _play = false;
 public:
     void update(double dt) override;
     void render() override {};
@@ -25,4 +30,6 @@ public:
     AnimationComponent() = delete;
     void setTextureRects(std::vector<sf::Rect<int>> rects);
     void flipSprite(sf::Vector2f scale);
+    void setLoop(bool isLoop);
+    void play(bool play);
 };

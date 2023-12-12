@@ -26,6 +26,7 @@ PlayerAnimationComponent::PlayerAnimationComponent(Entity *p):
     }
 
     setTextureRects(_idleAnim);
+    setLoop(true);
 }
 
 void PlayerAnimationComponent::update(double dt) {

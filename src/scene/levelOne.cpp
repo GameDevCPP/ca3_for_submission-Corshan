@@ -8,6 +8,8 @@
 #include "../components/cmp_pickup.h"
 #include "../components/cmp_player.h"
 #include "../components/cmp_coin.h"
+#include "../components/cmp_interaction.h"
+#include "../components/cmp_lever.h"
 
 std::shared_ptr<Entity> player;
 std::shared_ptr<Entity> scoreText;
@@ -65,6 +67,12 @@ Engine::resizeWindow({
             coin->addComponent<CoinComponent>(ls::getTilePosition(tile));
             coins.push_back(coin);
         }
+    }
+
+    {
+        auto lever = makeEntity();
+        lever->setPosition({1820,630});
+        lever->addComponent<LeverComponent>(player);
     }
 
     setLoaded(true);

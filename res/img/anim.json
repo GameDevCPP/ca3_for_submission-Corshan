@@ -13,5 +13,14 @@
       {"x":0,"y":190, "width":65, "height": 94},
       {"x":0,"y":190, "width":65, "height": 94}
     ]
+  },
+  "lever": {
+    "idle": {"x":504,"y":216, "width":70, "height": 70},
+    "play": [
+      {"x":504,"y":216, "width":70, "height": 70},
+      {"x":504,"y":72, "width":70, "height": 70},
+      {"x":504,"y":0, "width":70, "height": 70}
+
+    ]
   }
 }
