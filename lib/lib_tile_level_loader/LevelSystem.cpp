@@ -59,6 +59,8 @@ void LevelSystem::loadLevelFile(const std::string& path, const std::string& tile
             temp_tiles.push_back(START);
         }else if(tile == END){
             temp_tiles.push_back(END);
+        } else if (tile == COIN){
+            temp_tiles.push_back(COIN);
         }
         else{
             temp_tiles.push_back(EMPTY);

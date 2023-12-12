@@ -30,6 +30,10 @@ namespace sf {
         return vector;
     }
 
+    template <typename T> double distance(const Vector2<T> &v1, const Vector2<T> &v2){
+        return sqrt(pow((double )v1.x -  v2.x, 2.f) + pow((double )v1.y - v2.y, 2.f));
+    }
+
     template <typename T>
     Vector2<T> operator*(const Vector2<T>& left, const Vector2<T>& right) {
         Vector2<T> r = left;

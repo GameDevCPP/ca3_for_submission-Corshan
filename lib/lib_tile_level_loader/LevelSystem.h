@@ -28,6 +28,7 @@ public:
 		EMPTY = 0,
 		START = 160,
 		END = 58,
+        COIN = 170,
 		WALL = 3,
 	};
 

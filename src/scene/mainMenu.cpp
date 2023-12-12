@@ -5,6 +5,7 @@
 
 
 void MainMenu::Load() {
+    Engine::resizeWindow({600,600});
     {
         _playButton = makeEntity();
         _playButton->addComponent<ButtonComponent>(sf::Vector2f {Engine::getWindowSize().x/2.F,Engine::getWindowSize().y/2.F}, "Play");
