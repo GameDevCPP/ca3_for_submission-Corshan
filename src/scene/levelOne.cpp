@@ -7,6 +7,7 @@
 #include "../components/cmp_player_animation.h"
 #include "../components/cmp_pickup.h"
 #include "../components/cmp_player.h"
+#include "../components/cmp_coin.h"
 
 std::shared_ptr<Entity> player;
 std::shared_ptr<Entity> scoreText;
@@ -21,7 +22,7 @@ Engine::resizeWindow({
     static_cast<unsigned int>(ls::getWidth()*ls::getTileSize()),
     static_cast<unsigned int>(ls::getHeight()*ls::getTileSize())
 });
-//HUD
+
     {
         scoreText = makeEntity();
         scoreText->setPosition({270,0});
@@ -57,20 +58,11 @@ Engine::resizeWindow({
     }
 
     {
-        auto cs = ls::findTiles(ls::COIN);
+        auto coinTiles = ls::findTiles(ls::COIN);
 
-        for (auto c: cs) {
+        for (auto tile: coinTiles) {
             auto coin = makeEntity();
-            auto pos  =ls::getTilePosition(c);
-            coin->setPosition({pos.x+40, pos.y});
-            coin->addComponent<PickupComponent>(30.f);
-            auto sprite = coin->addComponent<SpriteComponent>();
-            sprite->setTexure(Resources::get<sf::Texture>("coinGold.png"));
-            sprite->getSprite().setOrigin({
-                        sprite->getSprite().getLocalBounds().width/2,
-                        sprite->getSprite().getLocalBounds().height/2
-                    });
-
+            coin->addComponent<CoinComponent>(ls::getTilePosition(tile));
             coins.push_back(coin);
         }
     }
