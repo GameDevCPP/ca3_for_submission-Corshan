@@ -22,5 +22,9 @@
       {"x":504,"y":0, "width":70, "height": 70}
 
     ]
+  },
+  "door": {
+    "open": {"x":648,"y":216, "width":70, "height": 140},
+    "close": {"x":648,"y":360, "width":70, "height": 140}
   }
 }

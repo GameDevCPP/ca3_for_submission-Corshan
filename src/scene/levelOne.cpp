@@ -10,10 +10,14 @@
 #include "../components/cmp_coin.h"
 #include "../components/cmp_interaction.h"
 #include "../components/cmp_lever.h"
+#include "../components/cmp_door.h"
 
 std::shared_ptr<Entity> player;
 std::shared_ptr<Entity> scoreText;
 std::vector<std::shared_ptr<Entity>> coins;
+std::shared_ptr<Entity> door;
+std::shared_ptr<Entity> lever;
+
 int score = 0;
 
 void LevelOne::Load() {
@@ -40,6 +44,13 @@ Engine::resizeWindow({
             sprite->getSprite().getLocalBounds().height/2
         });
         image->setPosition({200,sprite->getSprite().getLocalBounds().height/2});
+    }
+
+    {
+        door = makeEntity();
+        auto pos = ls::getTilePosition(ls::findTiles(ls::END)[0]);
+        door->setPosition({pos.x, pos.y-70});
+        door->addComponent<DoorComponent>();
     }
 
     {
@@ -70,10 +81,11 @@ Engine::resizeWindow({
     }
 
     {
-        auto lever = makeEntity();
+        lever = makeEntity();
         lever->setPosition({1820,630});
         lever->addComponent<LeverComponent>(player);
     }
+
 
     setLoaded(true);
 }
@@ -82,15 +94,11 @@ void LevelOne::Update(const double &dt) {
 
     int tile = ls::getTileAt({player->getPosition().x, player->getPosition().y+40});
 
-    if (tile == ls::END){
-        Engine::ChangeScene(&menu);
-    }
-
     auto playerPos = player->getPosition();
     for (int i = 0; i < coins.size(); i++) {
         auto parent = coins[i];
         auto coin  = parent->GetCompatibleComponent<PickupComponent>()[0];
-//        std::cout << c->getPosition() << " : " << playerPos << std::endl;
+
         if(coin->isCollide(playerPos) && !coin->isPickedUp()){
             parent->setForDelete();
             score += 100;
@@ -99,7 +107,16 @@ void LevelOne::Update(const double &dt) {
         }
     }
 
+    if (lever->GetCompatibleComponent<LeverComponent>()[0]->isPulled()){
+        door->GetCompatibleComponent<DoorComponent>()[0]->open();
+    }
+
     scoreText->GetCompatibleComponent<TextComponent>()[0]->SetText("= " + std::to_string(score));
+
+    if (tile == ls::END && door->GetCompatibleComponent<DoorComponent>()[0]->isOpen()){
+        Engine::ChangeScene(&menu);
+    }
+
     Scene::Update(dt);
 }
 
