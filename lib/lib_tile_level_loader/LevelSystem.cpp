@@ -158,8 +158,9 @@ void LevelSystem::renderFloor(RenderWindow& window) {
 
 LevelSystem::Tile LevelSystem::getTile(sf::Vector2ul p) {
 	if (p.x > _width || p.y > _height) {
-		throw string("Tile out of range: ") + to_string(p.x) + "," +
-			to_string(p.y) + ")";
+//		throw string("Tile out of range: ") + to_string(p.x) + "," +
+//			to_string(p.y) + ")";
+        throw std::invalid_argument("Tile out of range: " + to_string(p.x) + "," +to_string(p.y));
 	}
 	return _tiles[(p.y * _width) + p.x];
 }
@@ -186,7 +187,7 @@ std::vector<sf::Vector2ul> LevelSystem::findTiles(LevelSystem::Tile type) {
 LevelSystem::Tile LevelSystem::getTileAt(Vector2f v) {
 	auto a = v - _offset;
 	if (a.x < 0 || a.y < 0) {
-		throw string("Tile out of range ");
+		throw std::invalid_argument("Tile out of range");
 	}
 	return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }

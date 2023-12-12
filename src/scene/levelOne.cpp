@@ -6,6 +6,7 @@
 #include "../components/cmp_player_physics.h"
 #include "../components/cmp_player_animation.h"
 #include "../components/cmp_pickup.h"
+#include "../components/cmp_player.h"
 
 std::shared_ptr<Entity> player;
 std::shared_ptr<Entity> scoreText;
@@ -23,27 +24,25 @@ Engine::resizeWindow({
 //HUD
     {
         scoreText = makeEntity();
-        scoreText->setPosition({300,0});
-        auto txt = scoreText->addComponent<TextComponent>(std::to_string(score));
-        txt->
+        scoreText->setPosition({270,0});
+        auto txt = scoreText->addComponent<TextComponent>
+                (" = " + std::to_string(score));
+        txt->setFontSize(60);
         auto image = makeEntity();
         auto sprite = image->addComponent<SpriteComponent>();
         sprite->setTexure(Resources::get<sf::Texture>("coinGold.png"));
-        image->setPosition({200,0});
+        sprite->getSprite().setScale({1.5,1.5});
+        sprite->getSprite().setOrigin({
+            sprite->getSprite().getLocalBounds().width/2,
+            sprite->getSprite().getLocalBounds().height/2
+        });
+        image->setPosition({200,sprite->getSprite().getLocalBounds().height/2});
     }
 
     {
         player = makeEntity();
-        auto s = player->addComponent<SpriteComponent>();
-        auto texture = Resources::get<sf::Texture>("p3_spritesheet.png");
-        s->setTexure(texture);
-        auto pos = ls::getTilePosition(ls::findTiles(ls::START)[0]);
-        player->setPosition(pos);
-        s->getSprite().setTextureRect({0,0, 72, 94});
-        s->getSprite().setOrigin({s->getSprite().getLocalBounds().width/2, s->getSprite().getLocalBounds().height/2});
-        auto pp = player->addComponent<PlayerPhysicsComponent>(sf::Vector2f {72.f,94.f});
-
-        player->addComponent<PlayerAnimationComponent>();
+        auto p = player->addComponent<PlayerComponent>
+                (ls::getTilePosition(ls::findTiles(ls::START)[0]));
     }
 
     {
@@ -100,7 +99,7 @@ void LevelOne::Update(const double &dt) {
         }
     }
 
-    scoreText->GetCompatibleComponent<TextComponent>()[0]->SetText(std::to_string(score));
+    scoreText->GetCompatibleComponent<TextComponent>()[0]->SetText("= " + std::to_string(score));
     Scene::Update(dt);
 }
 
