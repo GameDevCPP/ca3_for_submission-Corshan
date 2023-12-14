@@ -1,9 +1,9 @@
 #pragma once
 
 #include "engine.h"
-#include "../components/cmp_text.h"
+#include "LevelSystem.h"
 
-class LevelOne: public Scene {
+class LevelTwo: public Scene {
 protected:
     std::shared_ptr<Entity> _player;
     std::shared_ptr<Entity> _HUD;
@@ -11,8 +11,8 @@ protected:
     std::shared_ptr<Entity> _door;
     std::shared_ptr<Entity> _lever;
 public:
-    LevelOne() = default;
-    ~LevelOne() override = default;
+    LevelTwo() = default;
+    ~LevelTwo() override = default;
 
     void Load() override;
     void Update(const double& dt) override;

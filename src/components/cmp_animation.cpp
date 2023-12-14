@@ -1,8 +1,7 @@
 #include "cmp_animation.h"
 
 AnimationComponent::AnimationComponent(Entity *p):
-Component(p), _index(0) {
-}
+Component(p), _index(0) {}
 
 void AnimationComponent::update(double dt) {
     if (_isLoop) {

@@ -17,12 +17,11 @@ public:
 
 	static void renderFloor(sf::RenderWindow& window);
 
-    static void setBackground(const std::string& path, sf::Vector2f size);
+    static void setBackground(const std::string& path, sf::Vector2f offset, sf::Vector2f scale = {1,1});
 
 	typedef int Tile;
 
 	static sf::Texture tilesTexture;
-
 
 	enum TILES {
 		EMPTY = 0,

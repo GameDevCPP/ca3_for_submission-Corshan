@@ -127,12 +127,13 @@ void LevelSystem::render(RenderWindow& window) {
 	}
 }
 
-void LevelSystem::setBackground(const std::string &path, sf::Vector2f size) {
+void LevelSystem::setBackground(const std::string &path, sf::Vector2f offset, sf::Vector2f scale) {
     _backgroundTexture.loadFromFile(path);
 
     auto s = std::make_unique<sf::Sprite>();
     s->setTexture(_backgroundTexture);
-    s->setPosition({50,0});
+    s->setPosition(offset);
+    s->setScale(scale);
 
     _background = std::move(s);
 }

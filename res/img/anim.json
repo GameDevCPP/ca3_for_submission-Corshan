@@ -18,8 +18,8 @@
     "idle": {"x":504,"y":216, "width":70, "height": 70},
     "play": [
       {"x":504,"y":216, "width":70, "height": 70},
-      {"x":504,"y":72, "width":70, "height": 70},
-      {"x":504,"y":0, "width":70, "height": 70}
+      {"x":494,"y":72, "width":70, "height": 70},
+      {"x":494,"y":0, "width":70, "height": 70}
 
     ]
   },
