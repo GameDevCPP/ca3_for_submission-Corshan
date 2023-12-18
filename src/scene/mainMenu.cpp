@@ -21,11 +21,13 @@ void MainMenu::Load() {
     {
         _playButton = makeEntity();
         _playButton->addComponent<ButtonComponent>(sf::Vector2f {x,y}, "Play");
+        _playButton->addComponent<SoundComponent>("button_press.wav");
     }
 
     {
         _quitButton = makeEntity();
         _quitButton->addComponent<ButtonComponent>(sf::Vector2f {x,y+100}, "Quit");
+        _quitButton->addComponent<SoundComponent>("button_press.wav");
     }
 
     GameManager::resetScore();
@@ -36,10 +38,12 @@ void MainMenu::Load() {
 void MainMenu::Update(const double &dt) {
 
     if (_playButton->GetCompatibleComponent<ButtonComponent>()[0]->isPressed()){
+        _playButton->GetCompatibleComponent<SoundComponent>()[0]->play();
         Engine::ChangeScene(&levelOne);
     }
 
     if (_quitButton->GetCompatibleComponent<ButtonComponent>()[0]->isPressed()){
+        _quitButton->GetCompatibleComponent<SoundComponent>()[0]->play();
         Engine::End();
     }
     Scene::Update(dt);

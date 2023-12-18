@@ -40,21 +40,25 @@ void EndMenu::Load() {
     {
         _restart = makeEntity();
         _restart->addComponent<ButtonComponent>(sf::Vector2f {x-200,y+200},"Restart");
+        _restart->addComponent<SoundComponent>("button_press.wav");
     }
 
     {
         _quit = makeEntity();
         _quit->addComponent<ButtonComponent>(sf::Vector2f {x+200, y+200}, "Quit");
+        _quit->addComponent<SoundComponent>("button_press.wav");
     }
 }
 
 void EndMenu::Update(const double &dt) {
 
     if (_quit->GetCompatibleComponent<ButtonComponent>()[0]->isPressed()){
+        _quit->GetCompatibleComponent<SoundComponent>()[0]->play();
         Engine::End();
     }
 
     if (_restart->GetCompatibleComponent<ButtonComponent>()[0]->isPressed()){
+        _quit->GetCompatibleComponent<SoundComponent>()[0]->play();
         Engine::ChangeScene(&levelOne);
     }
 

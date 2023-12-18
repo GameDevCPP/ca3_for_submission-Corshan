@@ -10,3 +10,4 @@
 #include "cmp_enemy.h"
 #include "cmp_text.h"
 #include "cmp_button.h"
+#include "cmp_sound.h"

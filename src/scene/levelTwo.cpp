@@ -88,6 +88,7 @@ void LevelTwo::Load() {
 void LevelTwo::Update(const double &dt) {
     static float progress = 0.f;
     progress += dt;
+
     if (_lever->GetCompatibleComponent<LeverComponent>()[0]->isPulled()){
         _door->GetCompatibleComponent<DoorComponent>()[0]->open();
     }
