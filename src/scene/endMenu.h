@@ -1,22 +1,20 @@
 #pragma once
 
 #include "engine.h"
+#include "LevelSystem.h"
 #include "../components/components.h"
 #include "game_manager.h"
 
-class MainMenu: public Scene {
-private:
-    std::shared_ptr<Entity> _playButton;
-    std::shared_ptr<Entity> _quitButton;
+class EndMenu: public Scene {
+protected:
+    std::shared_ptr<Entity> _quit;
+    std::shared_ptr<Entity> _restart;
+
 public:
-    MainMenu() = default;
-    ~MainMenu() override = default;
+    EndMenu() = default;
+    ~EndMenu() override = default;
 
     void Load() override;
-
     void Update(const double& dt) override;
-
     void Render() override;
 };
-
-

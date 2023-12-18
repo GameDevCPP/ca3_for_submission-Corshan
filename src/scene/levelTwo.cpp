@@ -95,7 +95,7 @@ void LevelTwo::Update(const double &dt) {
     int tile = ls::getTileAt({_player->getPosition().x, _player->getPosition().y+40});
 
     if (tile == ls::END && _door->GetCompatibleComponent<DoorComponent>()[0]->isOpen()){
-        Engine::ChangeScene(&menu);
+        Engine::ChangeScene(&endMenu);
     }
 
     if (progress >= 1){
@@ -104,7 +104,7 @@ void LevelTwo::Update(const double &dt) {
     }
 
     if (GameManager::getCurrentHealth() <= 0){
-        Engine::ChangeScene(&menu);
+        Engine::ChangeScene(&endMenu);
     }
 
     auto hud  = _HUD->GetCompatibleComponent<HUDComponent>()[0];
@@ -116,6 +116,11 @@ void LevelTwo::Update(const double &dt) {
 void LevelTwo::Render() {
     ls::render(Engine::GetWindow());
     Scene::Render();
+}
+
+void LevelTwo::UnLoad() {
+    ls::unload();
+    Scene::UnLoad();
 }
 
 void LevelTwo::damagePlayer(){

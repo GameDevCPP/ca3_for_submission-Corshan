@@ -8,3 +8,5 @@
 #include "cmp_enemy_ai.h"
 #include "cmp_enemy_animation.h"
 #include "cmp_enemy.h"
+#include "cmp_text.h"
+#include "cmp_button.h"

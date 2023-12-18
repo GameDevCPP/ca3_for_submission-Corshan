@@ -92,6 +92,11 @@ void LevelOne::Update(const double &dt) {
     Scene::Update(dt);
 }
 
+void LevelOne::UnLoad() {
+    ls::unload();
+    Scene::UnLoad();
+}
+
 void LevelOne::Render() {
     ls::render(Engine::GetWindow());
     Scene::Render();

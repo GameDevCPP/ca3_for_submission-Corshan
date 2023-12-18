@@ -1,9 +1,5 @@
 #include "mainMenu.h"
-#include "../components/cmp_text.h"
-#include "../components/cmp_button.h"
 #include "../game.h"
-#include "game_manager.h"
-
 
 void MainMenu::Load() {
     Engine::resizeWindow({700,700});
