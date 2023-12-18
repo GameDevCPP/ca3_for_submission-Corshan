@@ -2,8 +2,7 @@
 #include "LevelSystem.h"
 #include "../game.h"
 #include "../components/components.h"
-
-int score = 0;
+#include "game_manager.h"
 
 void LevelOne::Load() {
     ls::setBackground("res/img/background0.png", {50,0});
@@ -16,7 +15,8 @@ Engine::resizeWindow({
 
     {
         _HUD = makeEntity();
-        _HUD->addComponent<HUDComponent>();
+       auto hud =  _HUD->addComponent<HUDComponent>();
+       hud->setScore(GameManager::getScore());
     }
 
     {
@@ -45,7 +45,6 @@ Engine::resizeWindow({
 
     {
         auto coinTiles = ls::findTiles(ls::COIN);
-
         for (auto tile: coinTiles) {
             auto coin = makeEntity();
             coin->addComponent<CoinComponent>(ls::getTilePosition(tile));
@@ -74,7 +73,7 @@ void LevelOne::Update(const double &dt) {
 
         if(coin->isCollide(playerPos) && !coin->isPickedUp()){
             parent->setForDelete();
-            score += 100;
+            GameManager::updateScore();
             coin->setPickedUp(true);
             _coins.erase(_coins.begin()+i);
         }
@@ -84,7 +83,7 @@ void LevelOne::Update(const double &dt) {
         _door->GetCompatibleComponent<DoorComponent>()[0]->open();
     }
 
-    _HUD->GetCompatibleComponent<HUDComponent>()[0]->setScore(score);
+    _HUD->GetCompatibleComponent<HUDComponent>()[0]->setScore(GameManager::getScore());
 
     if (tile == ls::END && _door->GetCompatibleComponent<DoorComponent>()[0]->isOpen()){
         Engine::ChangeScene(&levelTwo);

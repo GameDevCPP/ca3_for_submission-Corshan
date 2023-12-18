@@ -61,5 +61,5 @@ void AnimationComponent::setTextureRects(std::vector<sf::Rect<int>> rects) {
 void AnimationComponent::flipSprite(sf::Vector2f scale) {
     auto s = _parent->GetCompatibleComponent<SpriteComponent>()[0];
     s->getSprite().setOrigin({s->getSprite().getLocalBounds().width/2.f, 0});
-    s->getSprite().setScale(scale);
+    s->getSprite().setScale({scale.x, 1});
 }

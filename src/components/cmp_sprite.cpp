@@ -11,6 +11,9 @@ void SpriteComponent::setTexure(std::shared_ptr<sf::Texture> tex)
   _sprite->setTexture(*_texture);
 }
 
+void SpriteComponent::setTransformRect(sf::IntRect rect) {
+    _sprite->setTextureRect(rect);
+}
 
 SpriteComponent::SpriteComponent(Entity* p)
     : Component(p), _sprite(make_shared<sf::Sprite>()) {}

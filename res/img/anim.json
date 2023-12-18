@@ -14,6 +14,12 @@
       {"x":0,"y":190, "width":65, "height": 94}
     ]
   },
+  "enemies": {
+    "walk": [
+      {"x":0,"y":37, "width":76, "height": 54},
+      {"x":0,"y":93, "width":72, "height": 48}
+    ]
+  },
   "lever": {
     "idle": {"x":504,"y":216, "width":70, "height": 70},
     "play": [

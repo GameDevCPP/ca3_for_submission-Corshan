@@ -11,5 +11,5 @@ public:
     PlayerAnimationComponent() = delete;
     PlayerAnimationComponent(Entity *p);
 
-    void update(double dt);
+    void update(double dt) override;
 };

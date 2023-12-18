@@ -2,6 +2,7 @@
 #include "../components/cmp_text.h"
 #include "../components/cmp_button.h"
 #include "../game.h"
+#include "game_manager.h"
 
 
 void MainMenu::Load() {
@@ -10,6 +11,9 @@ void MainMenu::Load() {
         _playButton = makeEntity();
         _playButton->addComponent<ButtonComponent>(sf::Vector2f {Engine::getWindowSize().x/2.F,Engine::getWindowSize().y/2.F}, "Play");
     }
+
+    GameManager::resetScore();
+
     setLoaded(true);
 }
 

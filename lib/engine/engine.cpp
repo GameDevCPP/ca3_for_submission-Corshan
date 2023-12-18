@@ -29,7 +29,7 @@ void Loading_update(float dt, const Scene* const scn) {
 	}
 }
 void Loading_render() {
-	// cout << "Eng: Loading Screen Render\n";
+//	 cout << "Eng: Loading Screen Render\n";
 
 //	static Sprite background;
 //	auto backTexture = Resources::get<Texture>("Space_Background.png");

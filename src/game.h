@@ -7,3 +7,5 @@
 extern MainMenu menu;
 extern LevelOne levelOne;
 extern LevelTwo levelTwo;
+
+static int totalScore = 0;
