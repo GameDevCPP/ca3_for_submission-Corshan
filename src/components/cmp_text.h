@@ -17,6 +17,8 @@ public:
 
   void setFontSize(unsigned int size);
 
+  void setFillColor(sf::Color color);
+
 protected:
   std::shared_ptr<sf::Font> _font;
   std::string _string;

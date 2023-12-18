@@ -5,17 +5,22 @@ const sf::Color IDLE_COLOR = sf::Color::White;
 const sf::Color HOVER_COLOR = sf::Color::Blue;
 const sf::Color ACTIVE_COLOR = sf::Color::Red;
 
+const sf::Color TEXT_HOVER_COLOR = sf::Color::White;
+const sf::Color TEXT_IDLE_COLOR = sf::Color::Black;
+
 void ButtonComponent::update(double dt) {
     auto pos = sf::Vector2f {sf::Mouse::getPosition(Engine::GetWindow())};
 
     if (_shape.getGlobalBounds().contains(pos)){
         _shape.setFillColor(HOVER_COLOR);
+        _text.setFillColor(TEXT_HOVER_COLOR);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             _shape.setFillColor(ACTIVE_COLOR);
             _isPressed = true;
         }
     } else{
         _shape.setFillColor(IDLE_COLOR);
+        _text.setFillColor(TEXT_IDLE_COLOR);
     }
 }
 

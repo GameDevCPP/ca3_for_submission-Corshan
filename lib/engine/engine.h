@@ -37,6 +37,7 @@ public:
 	Engine() = delete;
 	static void Start(unsigned int width, unsigned int height,
 		const std::string& gameName, Scene* scn);
+    static void End();
 	static void ChangeScene(Scene*);
 	static sf::RenderWindow& GetWindow();
 	static sf::Vector2u getWindowSize();
@@ -49,6 +50,7 @@ public:
 	static sf::Vector2f flocking(Entity* thisEnemy, sf::Vector2f toPlayer);
 
 private:
+    static bool _running;
 	static Scene* _activeScene;
 	static std::string _gameName;
 	static void Update();

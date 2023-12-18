@@ -11,6 +11,7 @@ using namespace sf;
 using namespace std;
 Scene* Engine::_activeScene = nullptr;
 std::string Engine::_gameName;
+bool Engine::_running;
 
 static bool loading = false;
 static float loadingspinner = 0.f;
@@ -99,19 +100,20 @@ void Engine::Start(unsigned int width, unsigned int height,
 	RenderWindow window(VideoMode(width, height), gameName);
 	//window.setVerticalSyncEnabled(true);
 	_gameName = gameName;
+    _running = true;
 	_window = &window;
 	Renderer::initialise(window);
 	Physics::initialise();
 	ChangeScene(scn);
-	while (window.isOpen()) {
+	while (window.isOpen() && _running) {
 		Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == Event::Closed) {
-				window.close();
+				_running = false;
 			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
-			window.close();
+			_running = false;
 		}
 
 		window.clear();
@@ -126,6 +128,10 @@ void Engine::Start(unsigned int width, unsigned int height,
 	window.close();
 	Physics::shutdown();
 	// Render::shutdown();
+}
+
+void Engine::End() {
+    _running = false;
 }
 
 std::shared_ptr<Entity> Scene::makeEntity() {
