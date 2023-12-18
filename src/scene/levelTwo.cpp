@@ -16,6 +16,8 @@ void LevelTwo::Load() {
         _HUD = makeEntity();
         auto hud = _HUD->addComponent<HUDComponent>();
         hud->setScore(GameManager::getScore());
+        GameManager::resetHealth();
+        hud->setHealth(GameManager::getCurrentHealth());
     }
 
     {
@@ -57,28 +59,35 @@ void LevelTwo::Load() {
     }
 
     {
-//        auto enemy = makeEntity();
-//        enemy->addComponent<EnemyAIComponent>(std::vector<sf::Vector2f>{
-//            {1890,1120},
-//            {140, 1120}
-//        });
-//        auto sprite = enemy->addComponent<SpriteComponent>();
-//        sprite->setTexure(Resources::get<sf::Texture>("enemies.png"));
-//        sprite->setTransformRect({0,37,76,55});
+        std::ifstream json("res/levels/enemies_spawnpoint.json");
+        nlohmann::json file = nlohmann::json::parse(json);
 
-        auto enemy = makeEntity();
-        enemy->addComponent<EnemyComponent>(
-                std::vector<sf::Vector2f>{
-            {1890,1120},
-            {140, 1120}
-        }, sf::Vector2f {120,1120}
-                );
+        for(auto en: file.at("levelTwo")){
+            auto enemy = makeEntity();
+            auto waypoints = std::vector<sf::Vector2f>();
 
+            for (auto waypoint: en.at("waypoints")) {
+                waypoints.push_back({
+                        waypoint.at("x"),
+                        waypoint.at("y")
+                        });
+            }
+
+            enemy->addComponent<EnemyComponent>(
+                    waypoints,
+                    sf::Vector2f {en.at("pos").at("x"),en.at("pos").at("y")}
+                    );
+
+            _enemies.push_back(enemy);
+        }
+
+        json.close();
     }
 }
 
 void LevelTwo::Update(const double &dt) {
-
+    static float progress = 0.f;
+    progress += dt;
     if (_lever->GetCompatibleComponent<LeverComponent>()[0]->isPulled()){
         _door->GetCompatibleComponent<DoorComponent>()[0]->open();
     }
@@ -89,11 +98,35 @@ void LevelTwo::Update(const double &dt) {
         Engine::ChangeScene(&menu);
     }
 
-    _HUD->GetCompatibleComponent<HUDComponent>()[0]->setScore(GameManager::getScore());
+    if (progress >= 1){
+        damagePlayer();
+        progress = 0;
+    }
+
+    if (GameManager::getCurrentHealth() <= 0){
+        Engine::ChangeScene(&menu);
+    }
+
+    auto hud  = _HUD->GetCompatibleComponent<HUDComponent>()[0];
+    hud->setScore(GameManager::getScore());
+    hud->setHealth(GameManager::getCurrentHealth());
     Scene::Update(dt);
 }
 
 void LevelTwo::Render() {
     ls::render(Engine::GetWindow());
     Scene::Render();
+}
+
+void LevelTwo::damagePlayer(){
+    auto playerSpite = _player->GetCompatibleComponent<SpriteComponent>()[0];
+    for (const auto& enemy: _enemies) {
+        auto enemySprite = enemy->GetCompatibleComponent<SpriteComponent>()[0];
+
+        if (playerSpite->getSprite().getGlobalBounds().intersects(enemySprite->getSprite().getGlobalBounds())){
+//            std::cout << "colide" << std::endl;
+            GameManager::updateHealth();
+        }
+
+    }
 }

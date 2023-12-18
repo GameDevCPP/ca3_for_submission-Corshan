@@ -4,11 +4,15 @@ HUDComponent::HUDComponent(Entity *p): Component(p) {
     _font = Resources::get<sf::Font>("RobotoMono-Regular.ttf");
     loadScoreText();
     loadCoinSprite();
+    loadHealthText();
+    loadHeartSprite();
 }
 
 void HUDComponent::render() {
     Renderer::queue(&_scoreText);
     Renderer::queue(_coinSprite.get());
+    Renderer::queue(&_healthText);
+    Renderer::queue(_heartSprite.get());
 }
 
 void HUDComponent::update(double dt) {
@@ -40,7 +44,35 @@ void HUDComponent::loadCoinSprite() {
             );
 }
 
+void HUDComponent::loadHeartSprite() {
+    _heartTexture = Resources::get<sf::Texture>("hud_spritesheet.png");
+    _heartSprite = std::make_shared<sf::Sprite>();
+
+    _heartSprite->setTexture(*_heartTexture);
+    _heartSprite->setTextureRect({0,94,53,45});
+
+    _heartSprite->setOrigin({
+        _heartSprite->getLocalBounds().width/2,
+        _heartSprite->getLocalBounds().height/2
+    });
+
+    _heartSprite->setPosition(_parent->getPosition() + sf::Vector2f{550, 40});
+}
+
+void HUDComponent::loadHealthText() {
+    _healthText.setString("= " + std::to_string(100));
+    _healthText.setFont(*_font);
+    _healthText.setCharacterSize(60);
+    _healthText.setPosition(_parent->getPosition() + sf::Vector2f {600,0});
+}
+
+
 void HUDComponent::setScore(int score) {
     _score = score;
     _scoreText.setString("= " + std::to_string(_score));
+}
+
+void
+ HUDComponent::setHealth(int health) {
+    _healthText.setString("= " + std::to_string(health));
 }

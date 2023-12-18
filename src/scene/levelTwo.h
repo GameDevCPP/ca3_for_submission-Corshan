@@ -4,10 +4,13 @@
 #include "LevelSystem.h"
 
 class LevelTwo: public Scene {
+private:
+    void damagePlayer();
 protected:
     std::shared_ptr<Entity> _player;
     std::shared_ptr<Entity> _HUD;
     std::vector<std::shared_ptr<Entity>> _coins;
+    std::vector<std::shared_ptr<Entity>> _enemies;
     std::shared_ptr<Entity> _door;
     std::shared_ptr<Entity> _lever;
 public:
