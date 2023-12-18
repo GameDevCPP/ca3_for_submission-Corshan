@@ -29,6 +29,11 @@ void MainMenu::Load() {
         _quitButton->addComponent<ButtonComponent>(sf::Vector2f {x,y+100}, "Quit");
         _quitButton->addComponent<SoundComponent>("button_press.wav");
     }
+    {
+        auto music = makeEntity();
+        auto music_cmp = music->addComponent<MusicComponent>("song18.wav");
+        music_cmp->play();
+    }
 
     GameManager::resetScore();
 

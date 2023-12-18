@@ -11,3 +11,4 @@
 #include "cmp_text.h"
 #include "cmp_button.h"
 #include "cmp_sound.h"
+#include "cmp_music.h"

@@ -3,7 +3,7 @@
 CoinComponent::CoinComponent(Entity *p, sf::Vector2f pos):
         Component(p) {
     _parent->setPosition(pos);
-    _parent->addComponent<PickupComponent>(40.f);
+    _parent->addComponent<PickupComponent>(50.f);
 
     auto sprite = _parent->addComponent<SpriteComponent>();
     sprite->setTexure(Resources::get<sf::Texture>("items_spritesheet.png"));
