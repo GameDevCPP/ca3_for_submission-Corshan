@@ -4,8 +4,9 @@
 MainMenu menu;
 LevelOne levelOne;
 LevelTwo levelTwo;
+LevelThree levelThree;
 EndMenu endMenu;
 
 int main(){
-    Engine::Start(500,500,"Untitled Game", &levelTwo);
+    Engine::Start(500,500,"Untitled Game", &menu);
 }
