@@ -16,6 +16,8 @@ Engine::resizeWindow({
     {
         _HUD = makeEntity();
        auto hud =  _HUD->addComponent<HUDComponent>();
+       GameManager::resetScore();
+       GameManager::resetHealth();
        hud->setScore(GameManager::getScore());
     }
 
@@ -58,6 +60,11 @@ Engine::resizeWindow({
         _lever->addComponent<LeverComponent>(_player);
     }
 
+    {
+        auto music = makeEntity();
+        auto music_cmp = music->addComponent<MusicComponent>("chillloopable.wav");
+        music_cmp->play();
+    }
 
     setLoaded(true);
 }
@@ -85,7 +92,9 @@ void LevelOne::Update(const double &dt) {
         _door->GetCompatibleComponent<DoorComponent>()[0]->open();
     }
 
-    _HUD->GetCompatibleComponent<HUDComponent>()[0]->setScore(GameManager::getScore());
+    auto hud  = _HUD->GetCompatibleComponent<HUDComponent>()[0];
+    hud->setScore(GameManager::getScore());
+    hud->setHealth(GameManager::getCurrentHealth());
 
     if (tile == ls::END && _door->GetCompatibleComponent<DoorComponent>()[0]->isOpen()){
         Engine::ChangeScene(&levelTwo);

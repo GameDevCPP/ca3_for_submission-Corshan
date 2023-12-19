@@ -83,6 +83,12 @@ void LevelTwo::Load() {
 
         json.close();
     }
+
+    {
+        auto music = makeEntity();
+        auto music_cmp = music->addComponent<MusicComponent>("002_Synthwave_15k.wav");
+        music_cmp->play();
+    }
 }
 
 void LevelTwo::Update(const double &dt) {

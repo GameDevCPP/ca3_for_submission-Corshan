@@ -48,6 +48,11 @@ void EndMenu::Load() {
         _quit->addComponent<ButtonComponent>(sf::Vector2f {x+200, y+200}, "Quit");
         _quit->addComponent<SoundComponent>("button_press.wav");
     }
+    {
+        auto music = makeEntity();
+        auto music_cmp = music->addComponent<MusicComponent>("song18.wav");
+        music_cmp->play();
+    }
 }
 
 void EndMenu::Update(const double &dt) {

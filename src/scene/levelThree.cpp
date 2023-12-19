@@ -57,6 +57,11 @@ void LevelThree::Load() {
         _lever->setPosition({140,630});
         _lever->addComponent<LeverComponent>(_player);
     }
+    {
+        auto music = makeEntity();
+        auto music_cmp = music->addComponent<MusicComponent>("a_chill_fever.wav");
+        music_cmp->play();
+    }
 }
 
 void LevelThree::Update(const double &dt) {
@@ -89,6 +94,7 @@ void LevelThree::Update(const double &dt) {
     auto hud  = _HUD->GetCompatibleComponent<HUDComponent>()[0];
     hud->setScore(GameManager::getScore());
     hud->setHealth(GameManager::getCurrentHealth());
+
 
     Scene::Update(dt);
 }
