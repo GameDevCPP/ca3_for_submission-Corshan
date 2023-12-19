@@ -31,16 +31,19 @@ LeverComponent::LeverComponent(Entity *p, std::shared_ptr<Entity> player): Compo
 
     auto anim = _parent->addComponent<AnimationComponent>();
     anim->setTextureRects({_idle});
+    _parent->addComponent<SoundComponent>("rattle1.wav");
 }
 
 void LeverComponent::update(double dt) {
     auto interact = _parent->GetCompatibleComponent<InteractionComponent>()[0];
     auto anim = _parent->GetCompatibleComponent<AnimationComponent>()[0];
+    auto sound = _parent->GetCompatibleComponent<SoundComponent>()[0];
 
     if (interact->isInteraction() && !_isPulled){
         anim->setTextureRects(_play);
         anim->play(true);
         _isPulled = true;
+        sound->play();
     }
 }
 

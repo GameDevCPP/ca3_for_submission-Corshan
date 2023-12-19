@@ -7,5 +7,5 @@ LevelTwo levelTwo;
 EndMenu endMenu;
 
 int main(){
-    Engine::Start(500,500,"Untitled Game", &menu);
+    Engine::Start(500,500,"Untitled Game", &levelTwo);
 }

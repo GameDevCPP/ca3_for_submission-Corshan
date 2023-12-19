@@ -12,3 +12,4 @@
 #include "cmp_button.h"
 #include "cmp_sound.h"
 #include "cmp_music.h"
+#include "cmp_interaction.h"

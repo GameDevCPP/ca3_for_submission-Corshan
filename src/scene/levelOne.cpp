@@ -70,12 +70,14 @@ void LevelOne::Update(const double &dt) {
     for (int i = 0; i < _coins.size(); i++) {
         auto parent = _coins[i];
         auto coin  = parent->GetCompatibleComponent<PickupComponent>()[0];
+        auto sprite = parent->GetCompatibleComponent<SpriteComponent>()[0];
 
         if(coin->isCollide(playerPos) && !coin->isPickedUp()){
-            parent->setForDelete();
             GameManager::updateScore();
+            parent->GetCompatibleComponent<SoundComponent>()[0]->play();
             coin->setPickedUp(true);
             _coins.erase(_coins.begin()+i);
+            sprite->setTexure(nullptr);
         }
     }
 

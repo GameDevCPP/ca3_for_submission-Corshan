@@ -13,4 +13,5 @@ CoinComponent::CoinComponent(Entity *p, sf::Vector2f pos):
         sprite->getSprite().getLocalBounds().width/2,
         sprite->getSprite().getLocalBounds().height/2
     });
+    _parent->addComponent<SoundComponent>("coin.wav");
 }

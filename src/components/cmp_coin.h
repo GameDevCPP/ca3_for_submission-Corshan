@@ -2,6 +2,7 @@
 
 #include "ecm.h"
 #include "cmp_pickup.h"
+#include "components.h"
 #include "system_resources.h"
 
 class CoinComponent: public Component {

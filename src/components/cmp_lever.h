@@ -1,10 +1,8 @@
 #pragma once
 
 #include "ecm.h"
-#include "cmp_sprite.h"
 #include "system_resources.h"
-#include "cmp_interaction.h"
-#include "cmp_animation.h"
+#include "components.h"
 
 class LeverComponent: public Component {
 protected:
