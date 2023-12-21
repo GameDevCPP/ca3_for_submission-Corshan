@@ -1,60 +1,65 @@
 # Game Design document
 
-In the following document, if you used a particular game design pattern in a section, please describe it (a brief description will do) and how you used it. Code snippets may help with this.
-In addition to this outline, I have an example of short design document from Richard McKenna titled: "Spiked Acid Game Design Document", which helped inform this document.
-
 ## Introduction
-* See "Spiked Acid Game Design Document"
+Don't go outside is a 2D platformer. The game will employ sprite-based animation, tiled foreground, collision detection, physics and gravity.
 
 
 ## Technology
-* Which platform(s)?
-* Game engine/software library (obviously SFML plus framework plus your own additions and external libraries - describe them all in a general fashion).
-
-
-## Backstory
-* If you want to get creative - knock yourselves out...
+The game will use the following libraries: 
+* SFML
+* nlohmann json
+* Box2D
+* Engine
+* ECM 
+* Tile loader
+* maths.h 
 
 
 ## Objective
-* Describe overall game objective - e.g. what must your character do to survive, win? How will your character get damaged/die
+The objective of the game is for the player to make their way to the exit door by jumping from platform to platform. The player will be able to collect coins to score points and will have to avoid enemies.
 
-
-## Gameplay
-- Describe how your game works in general - see the "Spiked Acid Game Design Document"
 
 ## Levels
-* Describe the levels.
-* Did you use procedurally generated levels?
-  - if so how?
-
-
+The levels were made using [Tiled](https://www.mapeditor.org/), this is a tile editor. It allows users to paint tile maps and then export them as a file. The file format that will be used is JSON. 
+|
 ## Controls
-* Mouse and or keyboard (other controller)
-  - how was it implemented
-- Controls
-- List keys and what they do?
-- Did you implement a control pattern?
-
+The controls of the game will be:
+| Control             |     Key    |
+|---------------------|------------| 
+|Move Left            | Left Arrow |
+|Move Right           | Right Arrow|
+|Jump                 | Up Arrow   |
+|Interact with objects| E          |
 
 ## GUI/In-game menu
-* Is there a splash screen?
-* E.g. New game, pause game etc.
-* If you used/implemented a GUI, describe the library you used (whether it was used in tile editor and/or main game e.g. title menu/networking management etc.)
-* Is there a countdown or transition to main game (while not necessarily a GUI issue - it's worthwhile mentioning it somewhere)
+The game will will have a splash menu and a score menu. The GUI will display the players score and health.
 
 
 ## Artwork
-* Describe the artwork used and source/origin of the artwork
-* Describe how you implemented and managed the textures (was memory management techniques used)
+In the engine library there is a system resource manger will be used to improve memory managment. 
+
+| Art    | Link     |
+|--------|----------|
+|Tileset | [here](https://opengameart.org/contentplatformer-art-complete-pack-often-updated) |
+| Backgrounds | [here](https://opengameart.org/content/backgrounds-for-2d-platformers) |
 
 
 ## Sound (sound effects)
-* Describe how sound is implemented and managed using SFML
-* Describe what sound effects your game has
+In the engine library there is a system resource manger will be used to improve memory managment.
 
+| Sound Effect    | Link |
+|-----------------|------|
+| Coin collecting | [here](https://opengameart.org/content/gold-coin-6) |
+| Pulling lever   | [here](https://opengameart.org/content/mechanical-sounds) |
+| Button press    | [here](https://opengameart.org/content/menu-selection-click) |
 
 ## Music
-* Describe the music used and its source/origin
-* Is there a menu track, and a track for main game (level).
-* Is the music randomly chosen for each game.
+In the engine library there is a system resource manger will be used to improve memory managment.
+
+| Music       | Link     |
+|-------------|----------|
+| Main Menu   | [here](https://opengameart.org/content/crystal-cave-song18) |
+| Score Menu  | [here](https://opengameart.org/content/crystal-cave-song18) |
+| Level One   | [here](https://opengameart.org/content/chill-loopable) |
+| Level Two   | [here](https://opengameart.org/content/calm-ambient-2-synthwave-15k) |
+| Level Three | [here](https://opengameart.org/content/a-chill-fever-loopable) |
