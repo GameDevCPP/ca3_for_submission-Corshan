@@ -15,7 +15,7 @@ The Game Design Document can be found [here](gdd.md)
 
 ## Video Demo 
 
-The demo of this project can be found [here]()
+The demo of this project can be found [here](https://youtu.be/YKFDQipirEw)
 
 ## Fully Functional Game
 

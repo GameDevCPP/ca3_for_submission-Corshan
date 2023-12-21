@@ -24,6 +24,7 @@ The levels were made using [Tiled](https://www.mapeditor.org/), this is a tile e
 |
 ## Controls
 The controls of the game will be:
+
 | Control             |     Key    |
 |---------------------|------------| 
 |Move Left            | Left Arrow |
